@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/_theme/icon.png">
+    <link rel="stylesheet" href="/_theme/style.css">
+    <title>ELIZA</title>
+</head>
+<body>
+    <h1><a href="/"><img class=frog width=200 height=200 alt="a frog" title="the frog of knowledge" src="/_theme/icon.png"></a>ELIZA</h1>
+    <details class="nav" >
+        <summary><code title="navigation">ls /tech/algorithms/</code></summary>
+        <ul>
+            
+                <li><a href=".."><img class="fileicon" src="/_theme/folder.png"> (parent folder)</a></li>
+            
+            
+                <li>
+                    <a href="."><img class="fileicon" src="/_theme/document.png"> Index </a>
+                </li>
+            
+                <li>
+                    <a href="ELIZA.html"><img class="fileicon" src="/_theme/document.png"> ELIZA  <img class=fileicon src="/_theme/you_are_here.png" title="you are here!" alt="(you are here!)"></a>
+                </li>
+            
+                <li>
+                    <a href="Shunting_yard.html"><img class="fileicon" src="/_theme/document.png"> Shunting yard </a>
+                </li>
+            
+        </ul>
+    </details>
+
+    <p><em>therapist chatbot from the 1960s</em></p>
+<p>Ok so I only have a very basic understanding of it from skimming the book &quot;Inventing ELIZA&quot; (MIT press 2026) but its pretty interesting. I dont know how accurate any of this. Please dont use this as a source, instead read the aforementioned book, you can download it for free as a pdf on the website.</p>
+<p>I'm not gonna go into too much detail but there are two programs:</p>
+<ul>
+<li>ELIZA: the engine that parses user input and figures out how to apply the rules.</li>
+<li>Doctor: basicaly a bunch of rules that tell eliza how to substitute words and output responses.</li>
+</ul>
+<p>ELIZA was written in some weird old language, and Doctor in an s-expression DSL.</p>
+<p>Heres a rule from the doctor program:</p>
+<pre><code>(if 3
+   ((0 if 0)
+      (do you think its likely that 3)
+      (do you wish that 3)
+      (what do you think about 3)
+      (really, 2 3)))
+</code></pre>
+<p><code>if 3</code> is the keyword that matches the rule and the priority of it.</p>
+<p>The <code>(0 if 0)</code> is pattern matching on the input, 0 stands for any amount of words.</p>
+<p><code>(do you think its likely that 3)</code> is the response. 3 is replaced by the third (group of) word from the matched pattern.</p>
+<p>So if theres an input like &quot;what if the sun was green&quot; the if ketword will be matched (assuming there arent any higher priority rules). Then the patern (0 if 0) will be matched and parsed into [&quot;what&quot;, &quot;if&quot;, &quot;the sun was green&quot;]. Then the response could be &quot;do you think its likely the sun was green&quot;.</p>
+<p>idk i think its interesting. I wanna try and make a chatbot hehe. Definitely making it different cuz this one is made to repeat the users words back at them in an intelligent sounding way. But i could definitely take inspiration from how it works.</p>
+<h2>freaky name shenanigans idk ignore this plz lol</h2>
+<p>eliza
+azile</p>
+<p>ezila
+re:alize</p>
+
+</body>
+</html>

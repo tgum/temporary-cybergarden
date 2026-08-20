@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/_theme/icon.png">
+    <link rel="stylesheet" href="/_theme/style.css">
+    <title>{{.Title}}</title>
+</head>
+<body>
+    <h1><a href="/"><img class=frog width=200 height=200 alt="a frog" title="the frog of knowledge" src="/_theme/icon.png"></a>{{.Title}}</h1>
+    <details class="nav" {{if .IsIndex}}open{{end}}>
+        <summary><code title="navigation">ls {{.FolderName}}{{if ne .FolderName "/"}}/{{end}}</code></summary>
+        <ul>
+            {{if ne .FolderName "/"}}
+                <li><a href=".."><img class="fileicon" src="/_theme/folder.png"> (parent folder)</a></li>
+            {{end}}
+            {{range .FileList}}
+                <li>
+                    <a href="{{.URL}}"><img class="fileicon" src="/_theme/{{if .IsDir}}folder.png{{else}}document.png{{end}}"> {{.Name}} {{if .Current}} <img class=fileicon src="/_theme/you_are_here.png" title="you are here!" alt="(you are here!)">{{end}}</a>
+                </li>
+            {{end}}
+        </ul>
+    </details>
+
+    {{.Content}}
+</body>
+</html>

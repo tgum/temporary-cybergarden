@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/_theme/icon.png">
+    <link rel="stylesheet" href="/_theme/style.css">
+    <title>003_Stack_VM</title>
+</head>
+<body>
+    <h1><a href="/"><img class=frog width=200 height=200 alt="a frog" title="the frog of knowledge" src="/_theme/icon.png"></a>003_Stack_VM</h1>
+    <details class="nav" open>
+        <summary><code title="navigation">ls /tech/experiments/003_Stack_VM/</code></summary>
+        <ul>
+            
+                <li><a href=".."><img class="fileicon" src="/_theme/folder.png"> (parent folder)</a></li>
+            
+            
+                <li>
+                    <a href="."><img class="fileicon" src="/_theme/document.png"> Index  <img class=fileicon src="/_theme/you_are_here.png" title="you are here!" alt="(you are here!)"></a>
+                </li>
+            
+                <li>
+                    <a href="assembler.html"><img class="fileicon" src="/_theme/document.png"> assembler </a>
+                </li>
+            
+                <li>
+                    <a href="opcodes.html"><img class="fileicon" src="/_theme/document.png"> opcodes </a>
+                </li>
+            
+                <li>
+                    <a href="program.asm"><img class="fileicon" src="/_theme/document.png"> program.asm </a>
+                </li>
+            
+                <li>
+                    <a href="program.asm.bak"><img class="fileicon" src="/_theme/document.png"> program.asm.bak </a>
+                </li>
+            
+                <li>
+                    <a href="program.sync-conflict-20260803-163955-DNO7RBI.asm"><img class="fileicon" src="/_theme/document.png"> program.sync-conflict-20260803-163955-DNO7RBI.asm </a>
+                </li>
+            
+                <li>
+                    <a href="symbols.html"><img class="fileicon" src="/_theme/document.png"> symbols </a>
+                </li>
+            
+                <li>
+                    <a href="vm.lua"><img class="fileicon" src="/_theme/document.png"> vm.lua </a>
+                </li>
+            
+                <li>
+                    <a href="vm.sync-conflict-20260803-163956-DNO7RBI.lua"><img class="fileicon" src="/_theme/document.png"> vm.sync-conflict-20260803-163956-DNO7RBI.lua </a>
+                </li>
+            
+        </ul>
+    </details>
+
+    <p>hmm what if i made a stack based vm like uxn. wouldnt that be fun hehe. ok so its really inspired by uxn but its less realistic and more minimalist(ish).</p>
+<p>my idea is to make a nice environement and maybe build up a stack from it which is nice to code in. anything to avoid lua Lollll</p>
+<p>a more technical specification will come later, but heres an overiew off how it works. memory is an array of integers (their size isnt fixed yet, but they're signed and kinda big-ish. rn im just using lua numbers) initialized with the prorgram. the program counter starts at address 0 and tries to execute whatever number it falls on. not every number is a valid instruction (thank god) so it just crashes when  encountering an unknown one.</p>
+<p>im thinking of using negative instructions and address space as <em>evil</em> code but idk how that would work. actually i could use negative addresses like syscalls kinda. like write a number to -100 and it will get output to the console iykwim</p>
+<h2>opcodes:</h2>
+<ol start="0">
+<li><code>nop O</code> no op</li>
+</ol>
+<h3>stack:</h3>
+<ol>
+<li><code>psh P</code> push</li>
+<li><code>pop V</code> pop</li>
+<li><code>dup D</code> duplicate</li>
+<li><code>swp W</code> swap</li>
+<li><code>ovr K</code> over</li>
+<li><code>rot G</code> rotate</li>
+</ol>
+<h3>memory:</h3>
+<ol start="7">
+<li><code>lds L</code> load</li>
+<li><code>str S</code> store</li>
+</ol>
+<h3>math / logic:</h3>
+<ol start="9">
+<li><code>add A</code> add</li>
+<li><code>sub U</code> subtract</li>
+<li><code>mul M</code> multiply</li>
+<li>deallocated cuz <code>and</code> is kind of useless since u can just use <code>mul</code>, im still not sure how much syntactic sugar i want</li>
+<li><code>not N</code> invert</li>
+<li><code>ibz B</code> is below zero</li>
+</ol>
+<h3>control flow:</h3>
+<ol start="15">
+<li><code>jmp J</code> jump (unconditional)</li>
+<li><code>cjp C</code> conditional jump (pop, if zero dont jump)</li>
+<li><code>rjp E</code> relative jump</li>
+<li><code>rcj Q</code> relative conditional jump</li>
+<li><code>cll F</code> call</li>
+<li><code>ret R</code> return</li>
+<li><code>hlt H</code> halt</li>
+<li><code>pfr w</code> pop from return?</li>
+<li><code>ptr x</code> pop to return?</li>
+</ol>
+<h2>demo program</h2>
+<p>i hand assembled this fibbonacci generator withpen and paper as a small test. it should push the first 50 or so numbers of the fibbonacci sequence to the stack.</p>
+<pre><code>1,0,1,1,5,5,9,1,100,7,1,1,9,3,1,100,8,1,50,10,14,1,4,16,21
+
+// copied from my notebook
+PSH 0
+PSH 1
+loop:
+OVR
+OVR
+ADD
+PSH counter
+LDS
+PSH 1
+ADD
+DUP
+PSH counter
+STR
+PSH iterations
+SUB
+IBZ
+PSH loop
+CJP
+HLT
+</code></pre>
+<h3>hello world</h3>
+<p>time to continue documenting my progress! i added a thing where if you STR a number at address -101 it will be printed out as ascii! also if you STR at -100 the number itself will be written but thats less interesting.</p>
+<p>so here is hello world ! assembled with pen and paper, then inputted manually into the vm. i will find a better wway to write programs dont worry</p>
+<pre><code>1,7,15,1,-101,8,20,1,32,7,3,1,33,9,7,3,1,2,18,21,1,3,19,1,1,9,1,32,8,1,7,15,0,72,101,108,108,111,44,32,87,111,114,108,100,33,10,0
+
+PSH start
+JMP
+print: PSH -101
+STR
+RET
+start: PSH counter
+LDS
+DUP
+PSH string
+ADD
+LDS
+DUP
+PSH 2
+RCJ
+HLT
+PSH print
+CLL
+PSH 1
+ADD
+PSH counter
+STR
+PSH start
+JMP
+counter: 0
+// you can change this to any null terminated string
+string: 72
+101
+108
+108
+111
+44
+32
+87
+111
+114
+108
+100
+33
+10
+0
+</code></pre>
+<p>this program could be heavily improved. first off the counter cloud be on the stack, its jist that way cuz i dindt really plan ahead loll. i did not have to make a subroutine to print a single character. those are the biggest thing i think. also it almost worked first try but i forgot to add a DUP somewhere.</p>
+<p>more thoughts: inputting comma separated numbers by hand is NOT fun. im thinking of making a small interpreter in the language that reads a string and writes the program in memory. but for that im obviously gonna need to implement reading files lol. so how the &quot;assembly&quot; would work is each opcode is assigned an uppercase letter, numbers are just decimal, everything else is ignored. maybe later ill make a real assembly with 3 letter opcodes but this is just a way to input and write programs easier. slowly going higher level.</p>
+<p>update: ive started working on the program! its almost done hehe. im lowk dreating the part where i have to assemble it manually and copy the numbers into a text editor wothout making mistakes. and debugging because no program in the history of programming has worked first try.</p>
+<p>im bored so ima write a better more golfed version of hello world hehe</p>
+<pre><code>Psh &amp;string(1018)
+@loop
+Dup
+Lds
+; end if encounter null byte
+Dup Psh 2 rcjQ
+  Hlt
+Psh -101 Str
+Psh 1 Add
+Psh &amp;loop(1002) Jmp
+@string ; Hello, World!
+72 101 108 108 111 44 32 87 111 114 108 100 33 10 0 @end
+</code></pre>
+<p>this program is made using the freaky assembler (see next section) and it works pretty nice!!! since most letters match to the first letter of the opcode u can just capitalize it! for the most common ones at least, as u can see i need to add a freaky Q for rcj... really cool to use tho since it skips most characters! it might be a lil confusing for other pepole (and me maybe loll) but nice</p>
+<h3>The Cool thing thats kind of an assembler but much worse than an assemler!</h3>
+<p>soirce maybe coming later. its like 215ish instruction so idk if i wanna οmcopy it. maybe once i have a real assembler lol. but what i Will do is copy over the compiled version! its ~300 numbers :D im going to die</p>
+<pre><code>1,100,15,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,1000,3,1,0,8,1,1,8,1,0,3,1,2,8,1,3,8,
+1,1,7,3,7,3,13,1,262,16,4,1,1,9,1,1,8,
+3,1,45,10,1,151,16,1,-1,1,3,8,2,1,118,15,
+3,1,48,10,3,14,1,194,16,3,1,10,10,14,13,1,194,16,1,3,7,1,6,18,1,1,1,3,8,1,2,7,1,10,11,9,1,2,8,2,1,118,15,
+2,1,3,7,13,1,221,16,1,3,7,1,2,7,11,1,248,19,1,0,3,1,2,8,1,3,8,
+1,65,10,3,14,1,244,16,3,1,26,10,14,13,1,244,16,1,267,19,1,118,15,
+2,1,118,15,
+1,0,7,8,1,0,7,1,1,9,1,0,8,20,
+2,2,1,1000,15,
+1,275,9,7,1,248,19,20,
+9,14,16,3,17,19,6,21,0,15,5,7,11,13,0,1,18,20,8,0,10,2,4,0,0,0
+</code></pre>
+<p>it took a while to make it work but now it does! there was only 1 bug in the source code, but i made a few typos while copying it over. also i had to add a subroutune cuz the stack wasnt getting cleared before jumping to usercode</p>
+<p>an improvement i added: theres a lookup tabke so letters dont translate to the opcode with the same number, instead each letter is matched with an opcode that makes more sense</p>
+<p>tiny demo program using it</p>
+<pre><code>P5 D A P-100 S H multiplies five by two and prints the result
+</code></pre>
+<p>while before it would have been</p>
+<pre><code>B5 D J B-101 I V
+</code></pre>
+<p>ok so im just keeping this section for archival purposes (translation: i hate deleting stuff) i will have to reorganize sometime. idk where i was going with this.</p>
+
+</body>
+</html>

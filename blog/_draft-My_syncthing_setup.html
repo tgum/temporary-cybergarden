@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/_theme/icon.png">
+    <link rel="stylesheet" href="/_theme/style.css">
+    <title> draft-My syncthing setup</title>
+</head>
+<body>
+    <h1><a href="/"><img class=frog width=200 height=200 alt="a frog" title="the frog of knowledge" src="/_theme/icon.png"></a> draft-My syncthing setup</h1>
+    <details class="nav" >
+        <summary><code title="navigation">ls /blog/</code></summary>
+        <ul>
+            
+                <li><a href=".."><img class="fileicon" src="/_theme/folder.png"> (parent folder)</a></li>
+            
+            
+                <li>
+                    <a href="."><img class="fileicon" src="/_theme/document.png"> Index </a>
+                </li>
+            
+                <li>
+                    <a href="001-100_Questions_for_WebMasters.html"><img class="fileicon" src="/_theme/document.png"> 001-100 Questions for WebMasters </a>
+                </li>
+            
+                <li>
+                    <a href="002-Glazing_Sweden.html"><img class="fileicon" src="/_theme/document.png"> 002-Glazing Sweden </a>
+                </li>
+            
+                <li>
+                    <a href="003-im_doing_blaugust_maybe.html"><img class="fileicon" src="/_theme/document.png"> 003-im doing blaugust maybe </a>
+                </li>
+            
+                <li>
+                    <a href="004-Drinks_I_like.html"><img class="fileicon" src="/_theme/document.png"> 004-Drinks I like </a>
+                </li>
+            
+                <li>
+                    <a href="005-Re_the_appeal_of_lowercase_text.html"><img class="fileicon" src="/_theme/document.png"> 005-Re the appeal of lowercase text </a>
+                </li>
+            
+                <li>
+                    <a href="006-whoa_i_have_atom_feed_now.html"><img class="fileicon" src="/_theme/document.png"> 006-whoa i have atom feed now </a>
+                </li>
+            
+                <li>
+                    <a href="007-Art_is_underrated.html"><img class="fileicon" src="/_theme/document.png"> 007-Art is underrated </a>
+                </li>
+            
+                <li>
+                    <a href="008-Websites_to_find_cool_websites.html"><img class="fileicon" src="/_theme/document.png"> 008-Websites to find cool websites </a>
+                </li>
+            
+                <li>
+                    <a href="009-Writing_daily_means_writing_daily.html"><img class="fileicon" src="/_theme/document.png"> 009-Writing daily means writing daily </a>
+                </li>
+            
+                <li>
+                    <a href="010-The_manly_feeder.html"><img class="fileicon" src="/_theme/document.png"> 010-The manly feeder </a>
+                </li>
+            
+                <li>
+                    <a href="011-Internet_radios_are_cool.html"><img class="fileicon" src="/_theme/document.png"> 011-Internet radios are cool </a>
+                </li>
+            
+                <li>
+                    <a href="012-I_am_a_Croque-Monsieur_god.html"><img class="fileicon" src="/_theme/document.png"> 012-I am a Croque-Monsieur god </a>
+                </li>
+            
+                <li>
+                    <a href="013-Jimorrisonmaxxing.html"><img class="fileicon" src="/_theme/document.png"> 013-Jimorrisonmaxxing </a>
+                </li>
+            
+                <li>
+                    <a href="014-August_12th.html"><img class="fileicon" src="/_theme/document.png"> 014-August 12th </a>
+                </li>
+            
+                <li>
+                    <a href="015-A_crow_looked_at_me.html"><img class="fileicon" src="/_theme/document.png"> 015-A crow looked at me </a>
+                </li>
+            
+                <li>
+                    <a href="016-Meteor_showers.html"><img class="fileicon" src="/_theme/document.png"> 016-Meteor showers </a>
+                </li>
+            
+                <li>
+                    <a href="017-Goated_Author.html"><img class="fileicon" src="/_theme/document.png"> 017-Goated Author </a>
+                </li>
+            
+                <li>
+                    <a href="018-Sixteen_days_of_blogging.html"><img class="fileicon" src="/_theme/document.png"> 018-Sixteen days of blogging </a>
+                </li>
+            
+                <li>
+                    <a href="019-Museums_are_pretentious.html"><img class="fileicon" src="/_theme/document.png"> 019-Museums are pretentious </a>
+                </li>
+            
+                <li>
+                    <a href="020-My_server_is_dead.html"><img class="fileicon" src="/_theme/document.png"> 020-My server is dead </a>
+                </li>
+            
+                <li>
+                    <a href="021-Do_you_also_love_the_the_sky%27s_colors.html"><img class="fileicon" src="/_theme/document.png"> 021-Do you also love the the sky&#39;s colors </a>
+                </li>
+            
+                <li>
+                    <a href="feed.atom"><img class="fileicon" src="/_theme/document.png"> feed.atom </a>
+                </li>
+            
+                <li>
+                    <a href="manlyfeeder.lua"><img class="fileicon" src="/_theme/document.png"> manlyfeeder.lua </a>
+                </li>
+            
+        </ul>
+    </details>
+
+    <p><em>written: 6th August 2026</em></p>
+<p><strong>THIS POST IS A DRAFT. NOT FINISHED. BAD.</strong></p>
+<p>So i like to write notes on my kindle in koreader, but it was pretty annoying to transfer them to my computer using SFTP or whatever. But then i found out about syncthing which syncs your files automatically! I havent used it much yet but I wanted to write down how I installed it because it was a bit complicated to understand.</p>
+<h2>my setup</h2>
+<ul>
+<li>I have a computer running fedora</li>
+<li>A raspberry pi zero 2w running raspberry pi os 13 that i use as a server</li>
+<li>ánd a jailbroken kindle paperwhite 10th generation (PW4) running a fairly recent firmware version i think? like 5.17 or something</li>
+</ul>
+<h2>installing syncthing</h2>
+<p>If you're on a normal system you can just look at the documentation. On fedora its just ‘sudo dnf install syncthing‘. On debian/raspberry pi os you need to add the ppa or something INSERT LINK.</p>
+<h3>...on a kindle</h3>
+<p>I found 2 options for koreader and 2 for KUAL i think. Since I only use koreader I chose the one that looked like it worked the most. I might try the other one some time since it deemd to have more features. I'll just show how to use syncthing.koplugin by AUTHOR.</p>
+<p>Its not that complicated, just clone the repo LINK, move it to your plugins folder (/mnt/us/koreader/plugins normally). Then download LINK the syncthing binary for your kindle's architecture (ARM 32bit probably. idk how well it works for older/newer kindles), extract it and move the &quot;syncthing&quot; executable into the syncthing.koplugin folder.</p>
+<h2>connecting it all</h2>
+<p>So for some reason, instead of a cli or something reasonable, syncthing decided to use an http ui as the main way to control it. which is kind of annoying since 2 of the machines I want to set it up on dont have a web browser lol</p>
+<p>But! There are (at least) two options to access the web ui from another, more capable device:</p>
+<ol>
+<li>Change the syncthing config to bind its web server to 0.0.0.0 (every ip address) instead of 127.0.0.1 (localhost, not accesible from other devices), which means other devices can connect to that port (i did not use this since it seemed cringe and insecure (literally me))</li>
+<li>Turns out ssh has a feature called tunnels which lets you kind of forward a port on a remote device to your local one. I dont really know how it works but its pretty nifty (this is the method I ended up using cuz it looked cool and based)</li>
+</ol>
+<h3>ssh tunneling</h3>
+<p>MAYBE A FANCY DRAWING OF THE COMMAND EXPLAINING THE DIFF PARTS</p>
+
+</body>
+</html>

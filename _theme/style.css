@@ -1,0 +1,39 @@
+body {
+  background: #fffaf0;
+  color: #101020;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 1.1em;
+  line-height: 1.4;
+  margin: 1em auto;
+  padding: 0 1em;
+  max-width: 55em;
+}
+
+.frog,
+.fileicon {
+  height: 1em;
+  width: auto;
+  baseline-shift: center;
+  image-rendering: pixelated;
+}
+
+.nav {
+  border: 0.1em solid #101005;
+}
+
+@media (width > 700px) {
+  .nav {
+    float: right;
+    width: 20em;
+  }
+}
+
+.nav summary {
+  padding: 0.2em;
+}
+
+.nav ul {
+  margin: 0;
+  padding: 0.3em;
+  list-style: none;
+}

@@ -1,0 +1,194 @@
+[
+  {
+    "Path": "/index.md"
+  },
+  {
+    "Path": "/About.md"
+  },
+  {
+    "Path": "/Sitemap.md"
+  },
+  {
+    "Path": "/blog/index.md"
+  },
+  {
+    "Path": "/blog/001-100_Questions_for_WebMasters.md"
+  },
+  {
+    "Path": "/blog/002-Glazing_Sweden.md"
+  },
+  {
+    "Path": "/blog/003-im_doing_blaugust_maybe.md"
+  },
+  {
+    "Path": "/blog/004-Drinks_I_like.md"
+  },
+  {
+    "Path": "/blog/005-Re_the_appeal_of_lowercase_text.md"
+  },
+  {
+    "Path": "/blog/006-whoa_i_have_atom_feed_now.md"
+  },
+  {
+    "Path": "/blog/007-Art_is_underrated.md"
+  },
+  {
+    "Path": "/blog/008-Websites_to_find_cool_websites.md"
+  },
+  {
+    "Path": "/blog/009-Writing_daily_means_writing_daily.md"
+  },
+  {
+    "Path": "/blog/010-The_manly_feeder.md"
+  },
+  {
+    "Path": "/blog/011-Internet_radios_are_cool.md"
+  },
+  {
+    "Path": "/blog/012-I_am_a_Croque-Monsieur_god.md"
+  },
+  {
+    "Path": "/blog/013-Jimorrisonmaxxing.md"
+  },
+  {
+    "Path": "/blog/014-August_12th.md"
+  },
+  {
+    "Path": "/blog/015-A_crow_looked_at_me.md"
+  },
+  {
+    "Path": "/blog/016-Meteor_showers.md"
+  },
+  {
+    "Path": "/blog/017-Goated_Author.md"
+  },
+  {
+    "Path": "/blog/018-Sixteen_days_of_blogging.md"
+  },
+  {
+    "Path": "/blog/019-Museums_are_pretentious.md"
+  },
+  {
+    "Path": "/blog/020-My_server_is_dead.md"
+  },
+  {
+    "Path": "/blog/021-Do_you_also_love_the_the_sky's_colors.md"
+  },
+  {
+    "Path": "/blog/_draft-My_syncthing_setup.md"
+  },
+  {
+    "Path": "/blog/feed.atom"
+  },
+  {
+    "Path": "/blog/manlyfeeder.lua"
+  },
+  {
+    "Path": "/imgs/index.md"
+  },
+  {
+    "Path": "/imgs/valid-atom.png"
+  },
+  {
+    "Path": "/not_found.md"
+  },
+  {
+    "Path": "/tech/index.md"
+  },
+  {
+    "Path": "/tech/algorithms/index.md"
+  },
+  {
+    "Path": "/tech/algorithms/ELIZA.md"
+  },
+  {
+    "Path": "/tech/algorithms/Shunting_yard.md"
+  },
+  {
+    "Path": "/tech/experiments/index.md"
+  },
+  {
+    "Path": "/tech/experiments/001_WebAudio/index.md"
+  },
+  {
+    "Path": "/tech/experiments/002_Chatbot/index.md"
+  },
+  {
+    "Path": "/tech/experiments/002_Chatbot/doc.md"
+  },
+  {
+    "Path": "/tech/experiments/002_Chatbot/main.lua"
+  },
+  {
+    "Path": "/tech/experiments/002_Chatbot/rules.lua"
+  },
+  {
+    "Path": "/tech/experiments/002_Chatbot/rules.txt"
+  },
+  {
+    "Path": "/tech/experiments/002_Chatbot/tokenize.lua"
+  },
+  {
+    "Path": "/tech/experiments/003_Stack_VM/index.md"
+  },
+  {
+    "Path": "/tech/experiments/003_Stack_VM/assembler.md"
+  },
+  {
+    "Path": "/tech/experiments/003_Stack_VM/opcodes.md"
+  },
+  {
+    "Path": "/tech/experiments/003_Stack_VM/program.asm"
+  },
+  {
+    "Path": "/tech/experiments/003_Stack_VM/program.asm.bak"
+  },
+  {
+    "Path": "/tech/experiments/003_Stack_VM/program.sync-conflict-20260803-163955-DNO7RBI.asm"
+  },
+  {
+    "Path": "/tech/experiments/003_Stack_VM/symbols.md"
+  },
+  {
+    "Path": "/tech/experiments/003_Stack_VM/vm.lua"
+  },
+  {
+    "Path": "/tech/experiments/003_Stack_VM/vm.sync-conflict-20260803-163956-DNO7RBI.lua"
+  },
+  {
+    "Path": "/tech/software/index.md"
+  },
+  {
+    "Path": "/tech/software/CyberGarden.md"
+  },
+  {
+    "Path": "/tech/software/Docker.md"
+  },
+  {
+    "Path": "/tech/software/WireGuard.md"
+  },
+  {
+    "Path": "/tech/software/commands/index.md"
+  },
+  {
+    "Path": "/tech/software/commands/go_cross_compilation.md"
+  },
+  {
+    "Path": "/tech/software/commands/ln.md"
+  },
+  {
+    "Path": "/tech/software/commands/ls.md"
+  },
+  {
+    "Path": "/tech/web/index.md"
+  },
+  {
+    "Path": "/tech/web/Atom_Feeds.md"
+  },
+  {
+    "Path": "/tech/web/CSS_layout.md"
+  },
+  {
+    "Path": "/tech/web/Head_tags.md"
+  }
+]

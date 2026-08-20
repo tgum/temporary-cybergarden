@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/_theme/icon.png">
+    <link rel="stylesheet" href="/_theme/style.css">
+    <title>Shunting yard</title>
+</head>
+<body>
+    <h1><a href="/"><img class=frog width=200 height=200 alt="a frog" title="the frog of knowledge" src="/_theme/icon.png"></a>Shunting yard</h1>
+    <details class="nav" >
+        <summary><code title="navigation">ls /tech/algorithms/</code></summary>
+        <ul>
+            
+                <li><a href=".."><img class="fileicon" src="/_theme/folder.png"> (parent folder)</a></li>
+            
+            
+                <li>
+                    <a href="."><img class="fileicon" src="/_theme/document.png"> Index </a>
+                </li>
+            
+                <li>
+                    <a href="ELIZA.html"><img class="fileicon" src="/_theme/document.png"> ELIZA </a>
+                </li>
+            
+                <li>
+                    <a href="Shunting_yard.html"><img class="fileicon" src="/_theme/document.png"> Shunting yard  <img class=fileicon src="/_theme/you_are_here.png" title="you are here!" alt="(you are here!)"></a>
+                </li>
+            
+        </ul>
+    </details>
+
+    <p><em>the shunting yard algorithm</em></p>
+<p>Invented by Edsger Dijkstra.</p>
+<p>This is a way to parse infix (1 + 1) notation and convert it to postfix/RPN (1 1 +) which is easier to interpret cuz no order of operations.</p>
+<p>All of this info is from the wikpedia article but it wasnt really clear to me so im rewriting it. I'm skipping over functions and right associating operators cuz idrk what it is and i dont need it :)</p>
+<p>Ok so for the algorithm there are 2 stacks, the output stack and operator stack.</p>
+<ul>
+<li>You go token by token.</li>
+<li>If the token is a number, push it to the output.</li>
+<li>If its an operator:</li>
+<li>
+<ul>
+<li>Remove the operators at the top of the stack if they have the same or higher precedence and add them to the output.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Add the operator to the opstack (AFTER step 1).</li>
+</ul>
+</li>
+<li>If its an open paren push it to the operator stack.</li>
+<li>If its a close paren, add all the operators to the output until it reaches the open paren, remove the open paren.</li>
+<li>At the end add all the operators to the output (FILO i think since its a stack).</li>
+</ul>
+<p>Pretty simple and neat !</p>
+
+</body>
+</html>

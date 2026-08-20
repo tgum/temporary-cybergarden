@@ -1,0 +1,100 @@
+# this is the program for jim morrison chatbot. avoid looking at this maybe since it contains all the possible answers and it might be more fun to find them yourself!
+# made by tgum
+
+whats -> what is
+whos -> who is
+u -> you
+ur -> you are
+your -> you are
+youre -> you are
+ure -> you are
+r -> are
+im -> i am
+wanna -> want to
+finna -> going to
+gonna -> going to
+
+jim * morrison -> you
+jim * morrisson -> you
+
+idc -> i dont care
+* i dont care * -> RUDE
+
+dumb -> stupid
+idiot -> stupid
+ignorant -> stupid
+dumbass -> stupid
+
+your * stupid -> you stupid
+* you * stupid * => Thank you? In the process of getting converted to a computer program my IQ may have taken a slight dip, but I wouldn't call myself stupid.
+
+your name -> JIMSNAME
+who are you -> JIMSNAME
+
+hi -> hello
+hiya -> hello
+hey -> hello
+yo -> hello
+
+whatsup -> whats up
+sup -> whats up
+wasup -> whats up
+wassup -> whats up
+whassup -> whats up
+
+sybau -> RUDE
+shut * up -> RUDE
+fuck * off -> RUDE
+want * fuck you -> FREAKY
+fuck you -> RUDE
+fuck yourself -> RUDE
+
+car seat headrest -> CSH
+csh -> CSH
+will toledo -> CSH
+twin fantasy -> CSH
+space cadet -> CSH
+* CSH * => OMG OMG CAR SEAT HEADREST THE OCEAN WASHED OVER YOUR GRAVE KEXP TEENS OF DENIAL MY BACK IS KILLING ME BABY
+
+llm -> AI
+ai -> AI
+
+* AI * => AI? What is that? This is just prewritten dialog with very primitive rules.
+
+* you think * => Could you really say that I think? You are just entering text into a computer, which then gets processed into this answer.
+
+* your mom * => Shes a wonderfully nice woman, isn't she.
+
+# did he like himself?
+* hates * you * => There will always be haters.
+hates -> hate
+* you hate you * => I am Jim Morrison?
+* hate * you are * -> RUDE
+* hate * you * -> RUDE
+# REMEMBER all forms of "you're" get turned into you are
+
+# lol. idk about this but i can always delete later!
+love -> like
+loves -> likes
+enjoy -> like
+enjoys -> like
+* you like * => Thats a bit controversial isn't it?
+* like * you are * -> HAPPY
+* like * you * -> FREAKY
+* likes * you are * -> HAPPY
+* likes * you * -> HAPPY
+* HAPPY * => I'm glad to hear that!
+
+* how are you * => I'm a little dead, apart from that I'm doing fine.
+* kill you * => But I'm already dead!
+
+# maybe remove this bcuz it leaks internal state
+* why are you => Thats pretty philosophical. Aren't we all
+
+* FREAKY * => Subscribe to Jim Premium to have access to features such as Freaky Jim!
+* RUDE * => Legitimately who asked?
+* JIMSNAME * => uhhh... Jim.
+* what is up * => The Sky maybe
+* are you * => Maybe !
+* you * => Thats me !
+* hello * => Nice too meet ya!

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/_theme/icon.png">
+    <link rel="stylesheet" href="/_theme/style.css">
+    <title>001_WebAudio</title>
+</head>
+<body>
+    <h1><a href="/"><img class=frog width=200 height=200 alt="a frog" title="the frog of knowledge" src="/_theme/icon.png"></a>001_WebAudio</h1>
+    <details class="nav" open>
+        <summary><code title="navigation">ls /tech/experiments/001_WebAudio/</code></summary>
+        <ul>
+            
+                <li><a href=".."><img class="fileicon" src="/_theme/folder.png"> (parent folder)</a></li>
+            
+            
+                <li>
+                    <a href="."><img class="fileicon" src="/_theme/document.png"> Index  <img class=fileicon src="/_theme/you_are_here.png" title="you are here!" alt="(you are here!)"></a>
+                </li>
+            
+        </ul>
+    </details>
+
+    <p>this is me experimenting with webaudio i guess.</p>
+<input type="range" min="0" max="100" value="80" id=volume>
+<script>
+const baseFreq = 440
+function semitone(n) {
+  // generates a semitone from an index type shi
+  let num = n - 9
+  return (2**(num/12)) * baseFreq
+}
+
+const audioCtx = new AudioContext();
+
+const osc = new OscillatorNode(audioCtx, {
+  type: "sine",
+  frequency: 440,
+});
+osc.start(audioCtx.currentTime);
+const gain = new GainNode(audioCtx)
+gain.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 0.2);;
+osc.connect(gain).connect(audioCtx.destination)
+
+let freqs = [semitone(0), semitone(2)]
+
+let time = 0
+window.onclick = () => {
+  window.onclick = null
+  console.log("rESUME")
+  gain.gain.linearRampToValueAtTime(volume.value/100, audioCtx.currentTime + 0.1);
+  audioCtx.resume();
+  setInterval(() => {
+    time += 1
+    let f = freqs[time % freqs.length]
+    osc.frequency.linearRampToValueAtTime(f, audioCtx.currentTime + 0.01)
+  }, 200)
+}
+
+volume.oninput = () => {
+  gain.gain.linearRampToValueAtTime(volume.value/100, audioCtx.currentTime + 0.1);
+}
+</script>
+
+</body>
+</html>

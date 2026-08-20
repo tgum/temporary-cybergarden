@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/_theme/icon.png">
+    <link rel="stylesheet" href="/_theme/style.css">
+    <title>CyberGarden</title>
+</head>
+<body>
+    <h1><a href="/"><img class=frog width=200 height=200 alt="a frog" title="the frog of knowledge" src="/_theme/icon.png"></a>CyberGarden</h1>
+    <details class="nav" >
+        <summary><code title="navigation">ls /tech/software/</code></summary>
+        <ul>
+            
+                <li><a href=".."><img class="fileicon" src="/_theme/folder.png"> (parent folder)</a></li>
+            
+            
+                <li>
+                    <a href="commands"><img class="fileicon" src="/_theme/folder.png"> commands </a>
+                </li>
+            
+                <li>
+                    <a href="."><img class="fileicon" src="/_theme/document.png"> Index </a>
+                </li>
+            
+                <li>
+                    <a href="CyberGarden.html"><img class="fileicon" src="/_theme/document.png"> CyberGarden  <img class=fileicon src="/_theme/you_are_here.png" title="you are here!" alt="(you are here!)"></a>
+                </li>
+            
+                <li>
+                    <a href="Docker.html"><img class="fileicon" src="/_theme/document.png"> Docker </a>
+                </li>
+            
+                <li>
+                    <a href="WireGuard.html"><img class="fileicon" src="/_theme/document.png"> WireGuard </a>
+                </li>
+            
+        </ul>
+    </details>
+
+    <p><em>this is about the cybergarden software, not this wiki</em></p>
+<p>cybergarden is a small app I made that turns a folder of markdown files and generates a folder of html files ! Its not much but you can use go templates to customize it a bunch!</p>
+<p>This wiki was made using cybergarden!</p>
+<h2>how 2 use</h2>
+<p>Its really simple (if you're kinda technical and use linux lmao.)</p>
+<ol>
+<li>Download the binary (ill publish some probably, for now compile it yourself)</li>
+<li>Run it with an input and output folder, like so: <code>./cybergarden input output</code></li>
+</ol>
+<p>You can also tell it which folders to use using environment variables (todo: add which)</p>
+<p>It might work on mac, very probably not on windows (although it shouldnt be too hard to make it work, pull requests are open!)</p>
+<h2>customization</h2>
+<p>You can really customize the output using themes if you want. At the moment theres only the built in theme but if you make some please contact me and I'll add it here!</p>
+<p>To use a theme just downlodad it and copy the _theme folder to the the input folder.</p>
+<p>If you want to make your own theme you can try to edit the default one i guess. The only required file is page.tmpl which is a go template file. I think the default one shows the main features.</p>
+
+</body>
+</html>

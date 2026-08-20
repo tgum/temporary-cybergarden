@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/_theme/icon.png">
+    <link rel="stylesheet" href="/_theme/style.css">
+    <title>Sitemap</title>
+</head>
+<body>
+    <h1><a href="/"><img class=frog width=200 height=200 alt="a frog" title="the frog of knowledge" src="/_theme/icon.png"></a>Sitemap</h1>
+    <details class="nav" >
+        <summary><code title="navigation">ls /</code></summary>
+        <ul>
+            
+            
+                <li>
+                    <a href="blog"><img class="fileicon" src="/_theme/folder.png"> blog </a>
+                </li>
+            
+                <li>
+                    <a href="imgs"><img class="fileicon" src="/_theme/folder.png"> imgs </a>
+                </li>
+            
+                <li>
+                    <a href="tech"><img class="fileicon" src="/_theme/folder.png"> tech </a>
+                </li>
+            
+                <li>
+                    <a href="."><img class="fileicon" src="/_theme/document.png"> Index </a>
+                </li>
+            
+                <li>
+                    <a href="About.html"><img class="fileicon" src="/_theme/document.png"> About </a>
+                </li>
+            
+                <li>
+                    <a href="Sitemap.html"><img class="fileicon" src="/_theme/document.png"> Sitemap  <img class=fileicon src="/_theme/you_are_here.png" title="you are here!" alt="(you are here!)"></a>
+                </li>
+            
+                <li>
+                    <a href="not_found.html"><img class="fileicon" src="/_theme/document.png"> not found </a>
+                </li>
+            
+        </ul>
+    </details>
+
+    <p>this page shows (almost) every file on this webbed site :3</p>
+<p><noscript>it honestly would have been pretty easy to make this work without javascript probably but im lazy so u need javascript to see the sitemap. sorry <code>&gt;.&lt;</code></noscript></p>
+<ul id="sitemapoutput"></ul>
+<script>
+  fetch("/sitemap.json")
+    .then(r => r.json())
+    .then(sitemap_loaded)
+  let sitemap
+  let folderstructure
+  function sitemap_loaded(s) {
+    console.log("loaded sitemap!")
+    sitemap = s
+    folderstructure = {"/": {}}
+    console.log(sitemap)
+    for (let file of sitemap) {
+      let components = file.Path.split("/")
+      components = components.filter(x => x != "")
+      console.log(components)
+      for (let i = 0; i < components.length; i++) {
+        let folder = folderstructure["/"]
+        for (let j = 0; j < i; j++) {
+          if (!folder.hasOwnProperty(components[j])) {
+            folder[components[j]] = {}
+          }
+          folder = folder[components[j]]
+        }
+        if (i == components.length-1) {
+          folder[components[i]] = true
+        }
+      }
+    }
+    showfiles(folderstructure, sitemapoutput, "")
+  }
+  function showfiles(tree, elt, path) {
+    for (let filename in tree) {
+      if (filename == "index.md") continue
+      let li = document.createElement("li")
+      let isfolder = tree[filename] !== true
+      let nicename = filename.replace(/\.md$/, "").replace("_", " ")
+      li.innerHTML = `<a href="${path}${filename.replace(/\.md$/, ".html")}"><img src="/_theme/${isfolder ? "folder" : "document"}.png" class=fileicon> ${nicename}</a>`
+      elt.append(li)
+      if (isfolder) {
+        let ul = document.createElement("ul")
+        li.append(ul)
+        showfiles(tree[filename], ul, path+filename+(path ? "/" : ""))
+      }
+    }
+  }
+</script>
+
+</body>
+</html>

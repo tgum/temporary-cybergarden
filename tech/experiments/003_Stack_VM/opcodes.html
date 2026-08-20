@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/_theme/icon.png">
+    <link rel="stylesheet" href="/_theme/style.css">
+    <title>opcodes</title>
+</head>
+<body>
+    <h1><a href="/"><img class=frog width=200 height=200 alt="a frog" title="the frog of knowledge" src="/_theme/icon.png"></a>opcodes</h1>
+    <details class="nav" >
+        <summary><code title="navigation">ls /tech/experiments/003_Stack_VM/</code></summary>
+        <ul>
+            
+                <li><a href=".."><img class="fileicon" src="/_theme/folder.png"> (parent folder)</a></li>
+            
+            
+                <li>
+                    <a href="."><img class="fileicon" src="/_theme/document.png"> Index </a>
+                </li>
+            
+                <li>
+                    <a href="assembler.html"><img class="fileicon" src="/_theme/document.png"> assembler </a>
+                </li>
+            
+                <li>
+                    <a href="opcodes.html"><img class="fileicon" src="/_theme/document.png"> opcodes  <img class=fileicon src="/_theme/you_are_here.png" title="you are here!" alt="(you are here!)"></a>
+                </li>
+            
+                <li>
+                    <a href="program.asm"><img class="fileicon" src="/_theme/document.png"> program.asm </a>
+                </li>
+            
+                <li>
+                    <a href="program.asm.bak"><img class="fileicon" src="/_theme/document.png"> program.asm.bak </a>
+                </li>
+            
+                <li>
+                    <a href="program.sync-conflict-20260803-163955-DNO7RBI.asm"><img class="fileicon" src="/_theme/document.png"> program.sync-conflict-20260803-163955-DNO7RBI.asm </a>
+                </li>
+            
+                <li>
+                    <a href="symbols.html"><img class="fileicon" src="/_theme/document.png"> symbols </a>
+                </li>
+            
+                <li>
+                    <a href="vm.lua"><img class="fileicon" src="/_theme/document.png"> vm.lua </a>
+                </li>
+            
+                <li>
+                    <a href="vm.sync-conflict-20260803-163956-DNO7RBI.lua"><img class="fileicon" src="/_theme/document.png"> vm.sync-conflict-20260803-163956-DNO7RBI.lua </a>
+                </li>
+            
+        </ul>
+    </details>
+
+    <p>yeah</p>
+<h2>opcode list:</h2>
+<ol start="0">
+<li><code>nop O</code> no op</li>
+</ol>
+<h3>stack:</h3>
+<ol>
+<li><code>psh P</code> push</li>
+<li><code>pop V</code> pop</li>
+<li><code>dup D</code> duplicate</li>
+<li><code>swp W</code> swap</li>
+<li><code>ovr K</code> over</li>
+<li><code>rot G</code> rotate</li>
+</ol>
+<h3>memory:</h3>
+<ol start="7">
+<li><code>lds L</code> load</li>
+<li><code>str S</code> store</li>
+</ol>
+<h3>math / logic:</h3>
+<ol start="9">
+<li><code>add A</code> add</li>
+<li><code>sub U</code> subtract</li>
+<li><code>mul M</code> multiply</li>
+<li>deallocated cuz <code>and</code> is kind of useless since u can just use <code>mul</code>, im still not sure how much syntactic sugar i want</li>
+<li><code>not N</code> invert</li>
+<li><code>ibz B</code> is below zero</li>
+</ol>
+<h3>control flow:</h3>
+<ol start="15">
+<li><code>jmp J</code> jump (unconditional)</li>
+<li><code>cjp C</code> conditional jump (pop, if zero dont jump)</li>
+<li><code>rjp E</code> relative jump</li>
+<li><code>rcj Q</code> relative conditional jump</li>
+<li><code>cll F</code> call</li>
+<li><code>ret R</code> return</li>
+<li><code>hlt H</code> halt</li>
+</ol>
+<p>im unsure if i will add the following. they seem kinda useful but maybe not that much.</p>
+<ol start="22">
+<li><code>pfr w</code> pop from return?</li>
+<li><code>ptr x</code> push to return?</li>
+</ol>
+
+</body>
+</html>

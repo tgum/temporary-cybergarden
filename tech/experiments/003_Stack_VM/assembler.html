@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/_theme/icon.png">
+    <link rel="stylesheet" href="/_theme/style.css">
+    <title>assembler</title>
+</head>
+<body>
+    <h1><a href="/"><img class=frog width=200 height=200 alt="a frog" title="the frog of knowledge" src="/_theme/icon.png"></a>assembler</h1>
+    <details class="nav" >
+        <summary><code title="navigation">ls /tech/experiments/003_Stack_VM/</code></summary>
+        <ul>
+            
+                <li><a href=".."><img class="fileicon" src="/_theme/folder.png"> (parent folder)</a></li>
+            
+            
+                <li>
+                    <a href="."><img class="fileicon" src="/_theme/document.png"> Index </a>
+                </li>
+            
+                <li>
+                    <a href="assembler.html"><img class="fileicon" src="/_theme/document.png"> assembler  <img class=fileicon src="/_theme/you_are_here.png" title="you are here!" alt="(you are here!)"></a>
+                </li>
+            
+                <li>
+                    <a href="opcodes.html"><img class="fileicon" src="/_theme/document.png"> opcodes </a>
+                </li>
+            
+                <li>
+                    <a href="program.asm"><img class="fileicon" src="/_theme/document.png"> program.asm </a>
+                </li>
+            
+                <li>
+                    <a href="program.asm.bak"><img class="fileicon" src="/_theme/document.png"> program.asm.bak </a>
+                </li>
+            
+                <li>
+                    <a href="program.sync-conflict-20260803-163955-DNO7RBI.asm"><img class="fileicon" src="/_theme/document.png"> program.sync-conflict-20260803-163955-DNO7RBI.asm </a>
+                </li>
+            
+                <li>
+                    <a href="symbols.html"><img class="fileicon" src="/_theme/document.png"> symbols </a>
+                </li>
+            
+                <li>
+                    <a href="vm.lua"><img class="fileicon" src="/_theme/document.png"> vm.lua </a>
+                </li>
+            
+                <li>
+                    <a href="vm.sync-conflict-20260803-163956-DNO7RBI.lua"><img class="fileicon" src="/_theme/document.png"> vm.sync-conflict-20260803-163956-DNO7RBI.lua </a>
+                </li>
+            
+        </ul>
+    </details>
+
+    <p><em>weird assembler</em></p>
+<pre><code>1,100,15,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,1000,3,1,0,8,1,1,8,1,0,3,1,2,8,1,3,8,
+1,1,7,3,7,3,13,1,262,16,4,1,1,9,1,1,8,
+3,1,45,10,1,151,16,1,-1,1,3,8,2,1,118,15,
+3,1,48,10,3,14,1,194,16,3,1,10,10,14,13,1,194,16,1,3,7,1,6,18,1,1,1,3,8,1,2,7,1,10,11,9,1,2,8,2,1,118,15,
+2,1,3,7,13,1,221,16,1,3,7,1,2,7,11,1,248,19,1,0,3,1,2,8,1,3,8,
+1,65,10,3,14,1,244,16,3,1,26,10,14,13,1,244,16,1,267,19,1,118,15,
+2,1,118,15,
+1,0,7,8,1,0,7,1,1,9,1,0,8,20,
+2,2,1,1000,15,
+1,275,9,7,1,248,19,20,
+9,14,16,3,17,19,6,21,0,15,5,7,11,13,0,1,18,20,8,0,10,2,4,0,0,0
+</code></pre>
+<h2>how it werks</h2>
+<p>it reads a text program starting at address 1000, converts it to executable instructions and jumps there</p>
+<h3>syntax</h3>
+<ul>
+<li>uppercase letter = opcode <a href="opcodes.html">(view table)</a></li>
+<li>optional minus (technically van be anywhere in the number but shh) and sequence of digits = number</li>
+<li>anything else = ignored (except to mark the end of a number)</li>
+</ul>
+<p>example program:</p>
+<pre><code>  // disable debug
+  Psh 0 Psh -102 Str
+  Psh &amp;string (1023)
+loop:
+  Dup
+  Lds
+  Dup
+  Psh 2
+ Qrcj
+  Hlt // halt if encounter zero
+  Psh -101 // print char
+  Str
+  Psh 1
+  Add
+  Psh &amp;loop (1007)
+  Jmp
+string:
+  72 101 108 108 111 44 32 87 111 114 108 100 33 10 0
+</code></pre>
+<p>this example is kinda misleading since it pretends to be normal assembly, but in fact its exactly the same as the next code block. anything thats not capital letters or numbers is comments</p>
+<pre><code>P0P-102SP1023DLDP2QHP-101SP1AP1007J
+72 101 108 108 111 44 32 87 111 114 108 100 33 10 0
+</code></pre>
+<p>im going to add more features but first i need to figure out how to bootstrap it. i have an idea</p>
+<pre><code>Psh usercode (1000)
+@loop
+Dup
+Lds
+Psh -100
+Str
+Psh 1
+Add
+Dup
+Psh outcounter (0)
+sUb
+iBz
+Psh 2
+rcj Q
+Hlt
+Psh loop (8)
+Jmp
+</code></pre>
+<p>1,100,15,
+1,1000,3,7,1,-100,8,1,44,1,-101,8,1,1,9,3,1,0,7,10,14,13,1,4,18,1,-25,17,1,10,1,-101,8,1,999,10,1,-100,8,21,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,1000,3,1,0,8,1,1,8,1,0,3,1,2,8,1,3,8,
+1,1,7,3,7,3,13,1,262,16,4,1,1,9,1,1,8,
+3,1,45,10,1,151,16,1,-1,1,3,8,2,1,118,15,
+3,1,48,10,3,14,1,194,16,3,1,10,10,14,13,1,194,16,1,3,7,1,6,18,1,1,1,3,8,1,2,7,1,10,11,9,1,2,8,2,1,118,15,
+2,1,3,7,13,1,221,16,1,3,7,1,2,7,11,1,248,19,1,0,3,1,2,8,1,3,8,
+1,65,10,3,14,1,244,16,3,1,26,10,14,13,1,244,16,1,267,19,1,118,15,
+2,1,118,15,
+1,0,7,8,1,0,7,1,1,9,1,0,8,20,
+2,2,1,1000,15,
+1,275,9,7,1,248,19,20,
+9,14,16,3,17,19,6,21,0,15,5,7,11,13,0,1,18,20,8,0,10,2,4,0,0,0,</p>
+<h2>self hosting!</h2>
+<p>i rewrote it so that it can compile itself!</p>
+<p>here is the source code:</p>
+<pre><code>@outcounter: 0
+@incounter:  0
+@number:     0
+@numberstate:0
+Psh init(100)
+popV // change this instruction to a jmp in the compiled version so it runs the assembler instead of itself lol
+
+  @print program
+Psh usercode (1000)
+@loop
+// print number and comma
+Dup Lds Psh -100 Str
+Psh 44 Psh -101 Str
+Psh 1 Add
+// jump to end if done printing
+Dup Psh outcounter(0) Lds
+sUb iBz Not Psh 4 rcj Q
+// restart
+Psh loop (-25) rjp E
+// print newline and program length
+Psh 10 Psh -101 Str Psh 999 sUb Psh -100 Str Hlt
+
+  @zero padding until address one hundred
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,
+
+  @init
+// fix variables
+Psh 1000 Dup Psh outcounter(0) Str Psh incounter(1) Str
+Psh 0 Dup Psh number(2) Str Psh numberstate(3) Str
+
+  @start
+Psh incounter(1) Lds Dup Lds
+// stop reading on null
+Dup Not Psh jumpuser(262) Cjp
+sWp
+// increment by one
+Psh 1 Add Psh incounter(1) Str
+
+  @isminus
+Dup
+// skip rest of subroutine if its not a minus
+Psh minus(45) sUb Psh isnumber(151) Cjp
+Psh -1 Psh numberstate(3) Str
+popV Psh start(118) Jmp
+
+  @isnumber
+Dup
+Psh digitzero(48)
+sUb
+// if ascii is less than digitzero its not a digit
+Dup iBz Psh notnumber(194) Cjp
+// if its greater than digitzero+ten its not a digit
+Dup Psh 10 sUb iBz Not Psh notnumber(194) Cjp
+// if sarting a number, mark it as positive
+Psh numberstate(3) Lds Psh 6 rcjQ
+Psh 1 Psh numberstate(3) Str
+// store the digit
+Psh number(2) Lds
+Psh 10 Mul
+Add
+Psh number(2) Str
+// restart loop
+popV Psh start(118) Jmp
+
+  @notnumber
+popV
+// skip the rest if we didnt just finish a number
+Psh numberstate(3) Lds Not Psh isletter(221) Cjp
+// give correct sign to the number
+Psh numberstate(3) Lds Psh number(2) Lds Mul
+Psh writeprogram(248) cllF
+// reset variables
+Psh 0 Dup Psh number(2) Str Psh numberstate(3) Str
+
+  @isletter
+Psh capital_a(65) sUb
+Dup iBz Psh notletter(244) Cjp
+Dup Psh 26 sUb iBz Not Psh notletter(244) Cjp
+Psh writeopcode(267) cllF
+Psh start(118) Jmp
+
+  @notletter
+popV Psh start(118) Jmp
+
+  @writeprogram
+Psh outcounter(0) Lds Str
+Psh outcounter(0) Lds Psh 1 Add Psh outcounter(0) Str
+Ret
+
+  @jumpuser
+popV popV Psh usercode(1000) Jmp
+
+  @writeopcode
+Psh opcodetable(275) Add Lds
+Psh writeprogram(248) cllF
+Ret
+
+  @opcodetable
+add ibz cjp dup rjp cll rot hlt     jmp ovr lds mul
+a09 b14 c16 d03 e17 f19 g06 h21 i00 j15 k05 l07 m11
+
+not nop psh rcj ret str     sub pop swp
+n13 o00 p01 q18 r20 s08 t00 u10 v02 w04 x00 y00 z00
+</code></pre>
+<p>if assembled with itself it will print its own source and length (a checksum would be nice but thats more code). i might try to rewrite it in a nicermore modular way. let me archive the compiled version of this in case it breaks lol</p>
+<pre><code>0,0,0,0,1,100,15,1,1000,3,7,1,-100,8,1,44,1,-101,8,1,1,9,3,1,0,7,10,14,13,1,4,18,1,-25,17,1,10,1,-101,8,1,999,10,1,-100,8,21,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1000,3,1,0,8,1,1,8,1,0,3,1,2,8,1,3,8,1,1,7,3,7,3,13,1,262,16,4,1,1,9,1,1,8,3,1,45,10,1,151,16,1,-1,1,3,8,2,1,118,15,3,1,48,10,3,14,1,194,16,3,1,10,10,14,13,1,194,16,1,3,7,1,6,18,1,1,1,3,8,1,2,7,1,10,11,9,1,2,8,2,1,118,15,2,1,3,7,13,1,221,16,1,3,7,1,2,7,11,1,248,19,1,0,3,1,2,8,1,3,8,1,65,10,3,14,1,244,16,3,1,26,10,14,13,1,244,16,1,267,19,1,118,15,2,1,118,15,1,0,7,8,1,0,7,1,1,9,1,0,8,20,2,2,1,1000,15,1,275,9,7,1,248,19,20,9,14,16,3,17,19,6,21,0,15,5,7,11,13,0,1,18,20,8,0,10,2,4,0,0,0,
+</code></pre>
+<p>it would be nicer if i added file i/o in the vm but idrk how to do that in lua so i wont do it yet</p>
+<h2>v2.0</h2>
+<p>so i decided to basically completely rewrite it. now it supports comments, and labels (kind of). ít is 480 instructions atm but everything is now subroutines ! while before it was freaky control flow, now theres a main loop, but other functions have their own loops and its nice. i'd copy the source here but its pretty long so instead ill archive the compiled output. i am going to need to make an emulator in c or go at some point cuz it takes 3 seconds to compoile itself on my kindle.</p>
+<p>comments start with semicolon(;) and ignore everything until a newline</p>
+<p>labels start with at(@), print their name (only lowercase letters) and their address</p>
+<pre><code>@outcounter 1000 @incounter 1001 @number 1002 @numberstate 1003 @printself 1016 @quineloop 1021 @init 1082 @start 1104 @switchchar 1111 @isnull 1160 @isat 1166 @issemicolon 1175 @isminus 1184 @isdigit 1193 @isupperletter 1210 @islowerletter 1227 @parselabel 1244 @labelloop 1247 @endloop 1264 @parsecomment 1283 @parsenumber 1307 @storesign 1321 @numberloop 1331 @parseopcode 1380 @opcodetable 1397 @getchar 1427 @printnewline 1444 @writeinstruction 1454 @jumpuser 1471
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,60,2,1,1000,3,7,3,1,5,7,9,1,5,8,1,-100,8,1,44,1,-101,8,1,1,9,3,1,0,7,10,14,13,1,4,18,1,-33,17,1,10,1,-101,8,1,999,10,1,-100,8,1,10,1,-101,8,1,5,7,1,-100,8,21,-0,-0,-0,-0,1,1000,3,1,0,8,1,1,8,1,0,3,1,2,8,1,3,8,-0,-0,-0,-0,1,427,19,-0,-0,-0,-0,3,1,160,19,1,471,16,3,1,165,19,1,243,16,3,1,174,19,1,283,16,3,1,183,19,1,307,16,3,1,192,19,1,307,16,3,1,209,19,1,380,16,2,1,-52,17,-0,-0,-0,13,20,-0,-0,-0,-0,1,64,10,13,20,-0,-0,-0,-0,1,59,10,13,20,-0,-0,-0,-0,1,45,10,13,20,-0,-0,-0,-0,3,1,48,10,14,13,4,1,58,10,14,11,20,-0,-0,-0,-0,3,1,65,10,14,13,4,1,91,10,14,11,20,-0,-0,-0,-0,3,1,97,10,14,13,4,1,123,10,14,11,20,-0,-0,-0,-0,1,-101,8,1,427,19,3,1,226,19,13,1,7,18,1,-101,8,1,-16,17,1,32,1,-101,8,1,0,7,1,-100,8,1,444,19,1,111,15,-0,-0,2,1,427,19,3,1,162,19,5,1,10,10,13,9,1,111,16,1,-19,17,-0,-0,-0,-0,3,1,183,19,3,13,1,6,18,4,1,3,9,4,13,1,2,11,1,1,10,1,3,8,1,48,10,1,2,7,1,10,11,9,1,2,8,1,427,19,3,1,192,19,1,-22,18,1,2,7,1,3,7,11,1,454,19,1,0,3,1,2,8,1,3,8,1,111,15,-0,-0,-0,-0,1,65,10,1,397,9,7,1,454,19,1,104,15,-0,-0,-0,-0,9,14,16,3,17,19,6,21,-1,15,5,7,11,13,0,1,18,20,8,-1,10,2,4,-1,-1,-1,-0,-0,-0,-0,1,1,7,3,7,4,1,1,9,1,1,8,20,-0,-0,-0,-0,1,10,1,-101,8,20,-0,-0,-0,-0,1,0,7,4,5,8,1,1,9,1,0,8,20,-0,-0,-0,-0,2,1,1000,15,-0,-0,-0,-0,
+</code></pre>
+<p>right now labels only print their address in the console, you have to manually edit the code to fix the references. the next step would be to store the labels in a data structure, and the references. then once the program is compilef, go back to every reference and replace it with the right address. that sounds complicated tho cuz where do i store both things.</p>
+<p>ive been thinking. you can store strings as integers. idk how many letters u can fit in a signed 64bit integer, but probably a lot actually, especially since u can probably pretend collisions wont happen. so 2 ins per label (name, addr) and 2 ins per reference (name, addr). the problem is where do i store that. imagine adding memory management before labels. i guess i could get the lenght of the program and write the label info after that. allocate space for 500 labels and the rest is for refs. idk how overkill 500 is. probably a bit atm lol but if i want to make a compiler it might not be enough</p>
+<p>ykwhat. maybe file reading is kind of important. then i could know the length of the program ez</p>
+
+</body>
+</html>
